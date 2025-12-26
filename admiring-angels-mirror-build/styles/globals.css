@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --bg: #FFF8FB;
+  --ink: #101114;
+}
+
+html { scroll-behavior: smooth; }
+body{
+  color: var(--ink);
+  background:
+    radial-gradient(800px 400px at 20% 0%, rgba(217,137,156,.14), transparent 60%),
+    radial-gradient(700px 350px at 90% 10%, rgba(201,162,76,.12), transparent 60%),
+    linear-gradient(180deg, var(--bg), #ffffff 60%, var(--bg));
+}
+*{ -webkit-tap-highlight-color: transparent; }
