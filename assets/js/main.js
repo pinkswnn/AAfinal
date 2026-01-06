@@ -1,114 +1,207 @@
+// assets/js/main.js (clean, safe, accessible behaviors)
+(() => {
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-(function(){
-  const modal = document.getElementById('ConnectModal');
-  const openBtns = document.querySelectorAll('[data-open-connect]');
-  const closeBtn = document.querySelector('[data-close-modal]');
+  // Year
+  const yearEl = $("#year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  const quickExit = document.getElementById('QuickExit');
-  const quietMode = document.getElementById('QuietMode');
-
-  const copyEmail = document.getElementById('CopyEmail');
-  const copyEmail2 = document.getElementById('CopyEmail2');
-
-  const privateNote = document.getElementById('PrivateNote');
-  const copyNote = document.getElementById('CopyNote');
-  const emailNote = document.getElementById('EmailNote');
-
-  function openModal(){
-    modal.setAttribute('aria-hidden','false');
-    document.body.style.overflow='hidden';
-    const focusable = modal.querySelector('button, a');
-    if (focusable) focusable.focus();
-  }
-  function closeModal(){
-    modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow='';
-  }
-
-  openBtns.forEach(b=>b.addEventListener('click', openModal));
-  closeBtn?.addEventListener('click', closeModal);
-  modal?.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
-  window.addEventListener('keydown', (e)=>{
-    if (e.key === 'Escape' && modal?.getAttribute('aria-hidden') === 'false') closeModal();
+  // Smooth scroll (respect reduced motion)
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  $$("[data-scroll]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = btn.getAttribute("data-scroll");
+      const el = target ? $(target) : null;
+      if (!el) return;
+      el.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth", block: "start" });
+    });
   });
 
-  // Quick Exit -> neutral site
-  quickExit?.addEventListener('click', ()=>{ window.location.href = 'https://weather.com'; });
+  // Reveal blocks
+  $$("[data-reveal]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-reveal");
+      const panel = id ? $("#" + id) : null;
+      if (!panel) return;
 
-  // Quiet Mode persist
-  const savedQuiet = localStorage.getItem('aa_quiet') === '1';
-  if (savedQuiet) document.body.classList.add('quiet');
-  quietMode?.setAttribute('aria-pressed', savedQuiet ? 'true' : 'false');
-  quietMode?.addEventListener('click', ()=>{
-    const isQuiet = document.body.classList.toggle('quiet');
-    localStorage.setItem('aa_quiet', isQuiet ? '1' : '0');
-    quietMode.setAttribute('aria-pressed', isQuiet ? 'true' : 'false');
-  });
-
-  async function copyText(text, buttonEl){
-    try{
-      await navigator.clipboard.writeText(text);
-      if(buttonEl){
-        const old = buttonEl.textContent;
-        buttonEl.textContent = 'Copied ✓';
-        setTimeout(()=>buttonEl.textContent = old, 1400);
+      const isHidden = panel.hasAttribute("hidden");
+      if (isHidden) {
+        panel.removeAttribute("hidden");
+        panel.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth", block: "start" });
+      } else {
+        panel.setAttribute("hidden", "");
       }
-    }catch(e){
-      const ta = document.createElement('textarea');
+    });
+  });
+
+  // Copy helper
+  async function copyText(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast("Copied.");
+    } catch {
+      // Fallback
+      const ta = document.createElement("textarea");
       ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
       document.body.appendChild(ta);
       ta.select();
-      document.execCommand('copy');
+      document.execCommand("copy");
       ta.remove();
-      if(buttonEl){
-        const old = buttonEl.textContent;
-        buttonEl.textContent = 'Copied ✓';
-        setTimeout(()=>buttonEl.textContent = old, 1400);
-      }
+      toast("Copied.");
     }
   }
 
-  copyEmail?.addEventListener('click', ()=> copyText(copyEmail.dataset.email, copyEmail));
-  copyEmail2?.addEventListener('click', ()=> copyText(copyEmail2.dataset.email, copyEmail2));
+  // Tiny toast (non-intrusive)
+  let toastTimer = null;
+  function toast(msg) {
+    let el = $("#toast");
+    if (!el) {
+      el = document.createElement("div");
+      el.id = "toast";
+      el.setAttribute("role", "status");
+      el.setAttribute("aria-live", "polite");
+      el.style.position = "fixed";
+      el.style.left = "50%";
+      el.style.bottom = "18px";
+      el.style.transform = "translateX(-50%)";
+      el.style.padding = "10px 14px";
+      el.style.borderRadius = "999px";
+      el.style.border = "1px solid rgba(16,17,20,.14)";
+      el.style.background = "rgba(255,255,255,.92)";
+      el.style.boxShadow = "0 10px 24px rgba(16,17,20,.14)";
+      el.style.fontWeight = "650";
+      el.style.fontSize = "0.95rem";
+      el.style.zIndex = "9999";
+      el.style.opacity = "0";
+      el.style.transition = "opacity .14s ease";
+      document.body.appendChild(el);
+    }
+    el.textContent = msg;
+    requestAnimationFrame(() => (el.style.opacity = "1"));
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => (el.style.opacity = "0"), 1200);
+  }
 
-  // Reveal blocks
-  document.querySelectorAll('[data-reveal]').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const id = btn.getAttribute('data-reveal');
-      const el = document.getElementById(id);
-      if(!el) return;
-      const hidden = el.hasAttribute('hidden');
-      if(hidden) el.removeAttribute('hidden');
-      el.scrollIntoView({behavior:'smooth', block:'start'});
+  // Copy email buttons
+  $$("[data-email]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const email = btn.getAttribute("data-email") || "";
+      if (email) copyText(email);
     });
   });
 
-  // Scroll helper
-  document.querySelectorAll('[data-scroll]').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const target = btn.getAttribute('data-scroll');
-      const node = document.querySelector(target);
-      if(node) node.scrollIntoView({behavior:'smooth', block:'start'});
+  // Private note: copy + email
+  const note = $("#privateNote");
+  const copyNote = $("#copyNote");
+  const emailNote = $("#emailNote");
+
+  if (copyNote && note) {
+    copyNote.addEventListener("click", () => {
+      const text = (note.value || "").trim();
+      if (!text) return toast("Write a note first.");
+      copyText(text);
     });
-  });
+  }
 
-  // Private note tool (local only)
-  const saved = localStorage.getItem('aa_note');
-  if(saved && privateNote) privateNote.value = saved;
+  if (emailNote && note) {
+    emailNote.addEventListener("click", () => {
+      const text = (note.value || "").trim();
+      if (!text) return toast("Write a note first.");
+      const subject = encodeURIComponent("A private note (from my device)");
+      const body = encodeURIComponent(text);
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    });
+  }
 
-  privateNote?.addEventListener('input', ()=>{
-    localStorage.setItem('aa_note', privateNote.value);
-  });
+  // Modal (accessible-ish: focus + escape + click outside)
+  const modal = $("#connectModal");
+  const dialog = modal ? $(".dialog", modal) : null;
+  const openers = $$("[data-open-connect]");
+  const closers = modal ? $$("[data-close-modal]", modal) : [];
 
-  copyNote?.addEventListener('click', ()=>{
-    const text = (privateNote?.value || '').trim();
-    if(!text) return;
-    copyText(text, copyNote);
-  });
+  let lastFocus = null;
 
-  emailNote?.addEventListener('click', ()=>{
-    const text = (privateNote?.value || '').trim();
-    const body = encodeURIComponent(text ? text : "Hi Admiring Angels,\n\nI’m reaching out quietly.\n\n");
-    window.location.href = `mailto:support@admiringangels.com?subject=${encodeURIComponent('A Private Note')}&body=${body}`;
-  });
+  function openModal() {
+    if (!modal) return;
+    lastFocus = document.activeElement;
+    modal.classList.add("isOpen");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    // Focus first interactive element inside
+    const first = $("a,button,[tabindex]:not([tabindex='-1'])", modal);
+    (first || dialog)?.focus?.();
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove("isOpen");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+  }
+
+  openers.forEach(btn => btn.addEventListener("click", openModal));
+  closers.forEach(btn => btn.addEventListener("click", closeModal));
+
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("isOpen")) closeModal();
+    });
+
+    // basic focus trap
+    modal.addEventListener("keydown", (e) => {
+      if (e.key !== "Tab") return;
+      const focusables = $$("a,button,textarea,input,select,[tabindex]:not([tabindex='-1'])", modal)
+        .filter(el => !el.hasAttribute("disabled"));
+      if (!focusables.length) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    });
+  }
+
+  // Quiet Mode toggle
+  const quietBtn = $("#quietMode");
+  const QUIET_KEY = "aa_quiet_mode";
+
+  function setQuiet(on) {
+    document.body.classList.toggle("quiet", on);
+    if (quietBtn) quietBtn.setAttribute("aria-pressed", String(on));
+    try { localStorage.setItem(QUIET_KEY, on ? "1" : "0"); } catch {}
+  }
+
+  if (quietBtn) {
+    quietBtn.addEventListener("click", () => {
+      const on = !document.body.classList.contains("quiet");
+      setQuiet(on);
+      toast(on ? "Quiet mode on." : "Quiet mode off.");
+    });
+  }
+
+  // Load quiet preference
+  try {
+    const saved = localStorage.getItem(QUIET_KEY);
+    if (saved === "1") setQuiet(true);
+  } catch {}
+
+  // Quick Exit (fast, neutral destination + replaces history)
+  const quickExitBtn = $("#quickExit");
+  if (quickExitBtn) {
+    quickExitBtn.addEventListener("click", () => {
+      // Replace current page so back button is less useful
+      window.location.replace("https://www.google.com/");
+    });
+  }
 })();
