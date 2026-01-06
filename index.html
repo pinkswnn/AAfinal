@@ -1,30 +1,26 @@
+<!-- index.html (refined + simplified copy, cleaner structure, better a11y) -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Admiring Angels — Heal With Dignity</title>
+
   <meta name="description" content="A private, dignity-first community for women rebuilding after divorce and domestic violence." />
   <meta property="og:title" content="Admiring Angels — Heal With Dignity" />
   <meta property="og:description" content="A private, dignity-first community for women rebuilding after divorce and domestic violence." />
   <meta property="og:image" content="assets/img/og.jpg" />
   <meta property="og:type" content="website" />
+
   <link rel="icon" type="image/png" href="assets/img/mark.png" />
   <link rel="stylesheet" href="assets/css/styles.css" />
-
-  <style>
-    /* Client Update: Darken Body Wording (Minimal Override) */
-    .section-head p{ color: rgba(16,17,20,.80) !important; }
-    .story p{ color: rgba(16,17,20,.88) !important; }
-    .choice p, .card p, .details-body{ color: rgba(16,17,20,.76) !important; }
-  </style>
-
 </head>
-<body>
-  <a class="skip" href="#main">Skip to Content</a>
 
-  <header class="header" id="top">
-    <div class="wrap header-inner">
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="siteHeader" id="top">
+    <div class="wrap headerInner">
       <a class="brand" href="#top" aria-label="Admiring Angels Home">
         <img src="assets/img/logo.png" alt="Admiring Angels" />
       </a>
@@ -36,10 +32,16 @@
         <a href="#help-now">Help Now</a>
       </nav>
 
-      <div class="header-actions">
-        <button class="btn ghost" id="quietMode" type="button" aria-pressed="false">Quiet Mode</button>
-        <button class="btn ghost" id="quickExit" type="button">Quick Exit</button>
-        <button class="btn primary" type="button" data-open-connect>I Need A Safe Next Step</button>
+      <div class="headerActions">
+        <button class="btn btnGhost" id="quietMode" type="button" aria-pressed="false" title="Reduce visuals and motion">
+          Quiet Mode
+        </button>
+        <button class="btn btnGhost" id="quickExit" type="button" title="Leave this site quickly">
+          Quick Exit
+        </button>
+        <button class="btn btnPrimary" type="button" data-open-connect>
+          I Need A Safe Next Step
+        </button>
       </div>
     </div>
   </header>
@@ -47,73 +49,106 @@
   <main id="main">
     <!-- HERO -->
     <section class="hero" aria-label="Admiring Angels Intro">
-      <div class="hero-media" aria-hidden="true">
-        <img src="assets/img/hero.jpg" alt="" />
-        <div class="hero-overlay"></div>
-        <div class="hero-grain"></div>
+      <div class="heroMedia" aria-hidden="true">
+        <img src="assets/img/hero.jpg" alt="" loading="eager" decoding="async" />
+        <div class="heroOverlay"></div>
+        <div class="heroGrain" aria-hidden="true"></div>
       </div>
 
-      <div class="wrap hero-content">
-        <div class="hero-center">
-          <div class="kicker">Dignity-First Support For Women Rebuilding</div>
-          <h1>Heal With Dignity.<br/>Live Again—Without Shame.</h1>
-          <p class="lead">
-            If you’re rebuilding after <strong>Divorce</strong> or <strong>Domestic Violence</strong>, you’re not behind.
-            You’re beginning—quietly and powerfully.
+      <div class="wrap heroContent">
+        <div class="heroCenter">
+          <p class="kicker">
+            Private support for women rebuilding after <strong>Divorce</strong> or <strong>Domestic Violence</strong>
           </p>
 
-          <div class="cta-row center">
-            <button class="btn primary" type="button" data-open-connect>Join The Circle Privately</button>
-            <a class="btn hero-secondary" href="#help-now">If You Need Help Right Now</a>
+          <h1>Heal With Dignity.<br />Move Forward—Quietly.</h1>
+
+          <p class="lead">
+            If you’re starting over, you don’t have to explain everything today.
+            You can take one safe step—at your pace.
+          </p>
+
+          <div class="ctaRow ctaCenter">
+            <button class="btn btnPrimary" type="button" data-open-connect>
+              Join The Circle Privately
+            </button>
+            <a class="btn btnSecondary" href="#help-now">
+              If You Need Help Right Now
+            </a>
           </div>
 
-          <div class="signal-row" aria-label="Core Promises">
+          <div class="signals" aria-label="Core promises">
             <div class="signal">
-              <span aria-hidden="true">🛡️</span>
-              <div><strong>Privacy Respected.</strong><br/>No public forms. No pressure.</div>
+              <span class="signalIcon" aria-hidden="true">🛡️</span>
+              <div class="signalText">
+                <strong>Privacy respected.</strong>
+                <span>No public forms. No pressure.</span>
+              </div>
             </div>
+
             <div class="signal">
-              <span aria-hidden="true">🤍</span>
-              <div><strong>Community Held.</strong><br/>You don’t have to carry this alone.</div>
+              <span class="signalIcon" aria-hidden="true">🤍</span>
+              <div class="signalText">
+                <strong>Community held.</strong>
+                <span>Support that doesn’t rush you.</span>
+              </div>
             </div>
+
             <div class="signal">
-              <span aria-hidden="true">✨</span>
-              <div><strong>Fresh Start Energy.</strong><br/>Starting over is strength.</div>
+              <span class="signalIcon" aria-hidden="true">🕊️</span>
+              <div class="signalText">
+                <strong>Gentle structure.</strong>
+                <span>Clear options. No overwhelm.</span>
+              </div>
             </div>
           </div>
+
+          <p class="microNote" role="note">
+            If you are in immediate danger, call 911. This page is not emergency services.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- OPTION C WASH -->
-    <section class="wash" id="why">
+    <!-- WHY -->
+    <section class="section sectionWash" id="why">
       <div class="wrap">
-        <div class="section-head center">
+        <header class="sectionHead sectionHeadCenter">
           <h2>Why Admiring Angels Exists</h2>
-          <p>This is a soft place for women who want to rebuild with privacy, dignity, and support—without being exposed or rushed.</p>
-        </div>
+          <p>
+            A soft, private place for women who want to rebuild with support—without being exposed, pushed, or judged.
+          </p>
+        </header>
 
-        <div class="two-col">
+        <div class="twoCol">
           <div class="story">
-            <p>Admiring Angels was born from a season of rebuilding—learning what it means to heal, and realizing how many women never get that chance.</p>
-            <p>Here, you can breathe. You can share slowly. You can begin again with people who understand.</p>
-            <blockquote>“Your truth shaped you—but it does not define you.”</blockquote>
+            <p>
+              Admiring Angels was born from a season of rebuilding—learning what it takes to heal, and realizing how many
+              women never get a safe space to begin again.
+            </p>
+            <p>
+              Here, you can breathe. You can share slowly. You can choose what help looks like—one step at a time.
+            </p>
 
-            <div class="cta-row">
-              <button class="btn primary" type="button" data-open-connect>Reach Out Privately</button>
-              <button class="btn soft" type="button" data-scroll="#choose">Choose What You Need Today</button>
+            <blockquote>
+              “Your truth shaped you—<span class="noWrap">but it does not define you.</span>”
+            </blockquote>
+
+            <div class="ctaRow">
+              <button class="btn btnPrimary" type="button" data-open-connect>Reach Out Privately</button>
+              <button class="btn btnSoft" type="button" data-scroll="#choose">Choose What You Need Today</button>
             </div>
           </div>
 
-          <div class="founder" aria-label="Founder">
-            <div class="photo-ring">
-              <img src="assets/img/angel.jpg" alt="Angel Presley" />
+          <aside class="founder" aria-label="Founder">
+            <div class="photoRing">
+              <img src="assets/img/angel.jpg" alt="Angel Presley" loading="lazy" decoding="async" />
             </div>
-            <div class="founder-text">
+            <div class="founderText">
               <strong>Angel Presley</strong>
               <span>Founder • Admiring Angels Women Support Services</span>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -121,30 +156,33 @@
     <!-- CHOOSE -->
     <section class="section" id="choose">
       <div class="wrap">
-        <div class="section-head center">
+        <header class="sectionHead sectionHeadCenter">
           <h2>What Do You Need Today?</h2>
-          <p>Pick the path that feels safest. You can change your mind at any time.</p>
-        </div>
+          <p>Pick what feels safest. You can change your mind at any time.</p>
+        </header>
 
-        <div class="choices">
-          <button class="choice" type="button" data-reveal="communityReveal">
+        <div class="choices" role="list">
+          <button class="choice" type="button" data-reveal="communityReveal" role="listitem">
             <h3>I Want Community—Without Pressure</h3>
             <p>See what Sister Circles and gentle gatherings look like.</p>
           </button>
-          <button class="choice" type="button" data-open-connect>
+
+          <button class="choice" type="button" data-open-connect role="listitem">
             <h3>I Want To Reach Out Privately</h3>
             <p>Open a pre-written email you can edit in your own words.</p>
           </button>
-          <button class="choice" type="button" data-scroll="#help-now">
+
+          <button class="choice" type="button" data-scroll="#help-now" role="listitem">
             <h3>I Need Help Right Now</h3>
             <p>Immediate resources, discreetly listed.</p>
           </button>
         </div>
 
-        <div class="reveal wash-mini" id="communityReveal" hidden>
-          <div class="reveal-inner">
+        <section class="reveal" id="communityReveal" hidden aria-label="Community details">
+          <div class="revealInner">
             <h3>Community Looks Like This</h3>
-            <div class="mini-grid">
+
+            <div class="miniGrid">
               <div class="mini">
                 <strong>Sister Circles</strong>
                 <span>Guided conversations where you can exhale, share, and rebuild—without being “fixed.”</span>
@@ -158,140 +196,175 @@
                 <span>Help finding the next right step—at your pace.</span>
               </div>
             </div>
-            <div class="cta-row">
-              <button class="btn primary" type="button" data-open-connect>Join Quietly</button>
-              <button class="btn soft" id="copyEmail" type="button" data-email="support@admiringangels.com">Copy Our Email</button>
+
+            <div class="ctaRow">
+              <button class="btn btnPrimary" type="button" data-open-connect>Join Quietly</button>
+              <button class="btn btnSoft" id="copyEmail" type="button" data-email="support@admiringangels.com">
+                Copy Our Email
+              </button>
             </div>
           </div>
-        </div>
-
+        </section>
       </div>
     </section>
 
     <!-- SUPPORT -->
-    <section class="wash" id="support">
+    <section class="section sectionWash" id="support">
       <div class="wrap">
-        <div class="section-head center">
+        <header class="sectionHead sectionHeadCenter">
           <h2>How Support Works</h2>
           <p>Simple, structured, and human—built for women healing after Divorce and Domestic Violence.</p>
-        </div>
+        </header>
 
         <div class="cards">
           <article class="card">
             <h3>Sister Circles</h3>
-            <p>Guided, dignity-first space to exhale, speak, and rebuild—without pressure.</p>
-            <div class="tag">Community Building First</div>
+            <p>Guided space to speak, breathe, and rebuild—without pressure.</p>
+            <div class="tag">Community first</div>
           </article>
+
           <article class="card">
             <h3>Healing Gatherings</h3>
             <p>Soft structure and shared reflection—so healing feels possible, not overwhelming.</p>
-            <div class="tag">Rhythm + Belonging</div>
+            <div class="tag">Rhythm + belonging</div>
           </article>
+
           <article class="card">
             <h3>Resource Support</h3>
             <p>Support locating trusted next steps—quietly and respectfully.</p>
-            <div class="tag">No Shame. No Rush.</div>
+            <div class="tag">No shame. No rush.</div>
           </article>
         </div>
 
-        <div class="note-tool wash-mini">
-          <div class="note-top">
+        <section class="noteTool" aria-label="Private note tool">
+          <div class="noteTop">
             <div>
               <h3>Not Ready To Send Anything?</h3>
-              <p>Write a private note for yourself. Nothing is sent or stored online. Copy it when you’re ready.</p>
+              <p>
+                Write a private note for yourself. Nothing is saved or sent unless you choose to copy or email it.
+              </p>
             </div>
-            <div class="note-badge">Private • Local Only</div>
+            <div class="noteBadge" aria-label="Privacy note">Private • On Your Device</div>
           </div>
 
+          <label class="srOnly" for="privateNote">Private note</label>
           <textarea id="privateNote" rows="5" placeholder="Write what you want to say—only for you."></textarea>
 
-          <div class="cta-row">
-            <button class="btn soft" type="button" id="copyNote">Copy My Note</button>
-            <button class="btn primary" type="button" id="emailNote">Email This Note</button>
+          <div class="ctaRow">
+            <button class="btn btnSoft" type="button" id="copyNote">Copy My Note</button>
+            <button class="btn btnPrimary" type="button" id="emailNote">Email This Note</button>
           </div>
 
-          <div class="tiny center">Tip: Bookmark this page and return when you feel ready.</div>
-        </div>
+          <p class="tiny center">Tip: Bookmark this page and return when you feel ready.</p>
+        </section>
       </div>
     </section>
 
     <!-- HELP NOW -->
     <section class="section" id="help-now">
       <div class="wrap">
-        <div class="section-head center">
+        <header class="sectionHead sectionHeadCenter">
           <h2>If You Need Immediate Support</h2>
           <p>If you’re in danger, call 911. If you need someone right now, use the resources below.</p>
-        </div>
+        </header>
 
         <div class="accordion">
           <details open>
             <summary>National Domestic Violence Hotline</summary>
-            <div class="details-body">
-              Call: <a href="tel:18007997233">1-800-799-7233</a> • Text: “START” to <a href="sms:88788">88788</a>
+            <div class="detailsBody">
+              Call: <a href="tel:18007997233">1-800-799-7233</a>
+              <span class="dot" aria-hidden="true">•</span>
+              Text: “START” to <a href="sms:88788">88788</a>
             </div>
           </details>
+
           <details>
             <summary>Crisis Text Line (24/7)</summary>
-            <div class="details-body">Text <strong>HOME</strong> to <a href="sms:741741">741741</a>.</div>
+            <div class="detailsBody">
+              Text <strong>HOME</strong> to <a href="sms:741741">741741</a>.
+            </div>
           </details>
+
           <details>
             <summary>Privacy Note</summary>
-            <div class="details-body">
-              Use <strong>Quick Exit</strong> in the top bar if you need to leave fast. Consider clearing browsing history if safety is a concern.
+            <div class="detailsBody">
+              Use <strong>Quick Exit</strong> in the top bar if you need to leave fast. If safety is a concern, consider
+              clearing browsing history.
             </div>
           </details>
         </div>
 
-        <footer class="footer">
-          <div class="footer-inner">
-            <div class="footer-brand centerOnMobile">
-              <img src="assets/img/logo.png" alt="Admiring Angels" />
+        <footer class="siteFooter">
+          <div class="footerInner">
+            <div class="footerBrand centerOnMobile">
+              <img src="assets/img/logo.png" alt="Admiring Angels" loading="lazy" decoding="async" />
               <div>
                 <strong>Admiring Angels</strong>
                 <span>Helping women heal and live again after Divorce and Domestic Violence.</span>
               </div>
             </div>
-            <div class="footer-meta centerOnMobile">
+
+            <div class="footerMeta centerOnMobile">
               <div><a href="mailto:support@admiringangels.com">support@admiringangels.com</a></div>
               <div class="tiny">© <span id="year"></span> Admiring Angels</div>
-              <div class="dev tiny"><a href="https://hustleignite.pinkswann.com" target="_blank" rel="noopener noreferrer">Site Developed By HCH</a></div>
+              <div class="dev tiny">
+                <a href="https://hustleignite.pinkswann.com" target="_blank" rel="noopener noreferrer">
+                  Site Developed By HCH
+                </a>
+              </div>
             </div>
           </div>
         </footer>
-
       </div>
     </section>
   </main>
 
   <!-- CONNECT MODAL -->
   <div class="modal" id="connectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Private Connection Options">
-    <div class="dialog" role="document">
-      <div class="dialog-head">
+    <div class="dialog" role="document" tabindex="-1">
+      <div class="dialogHead">
         <div>
           <h3>Private Ways To Connect</h3>
-          <p>Choose the option that feels safest. You can edit everything before sending.</p>
+          <p>Choose what feels safest. You can edit everything before sending.</p>
         </div>
-        <button class="btn soft" type="button" data-close-modal>Close</button>
+        <button class="btn btnSoft" type="button" data-close-modal>Close</button>
       </div>
 
-      <div class="dialog-body">
-        <a class="pill" href="mailto:support@admiringangels.com?subject=I%20Need%20A%20Safe%20Next%20Step&body=Hi%20Admiring%20Angels%2C%0A%0AI%E2%80%99m%20rebuilding%20after%20Divorce%20or%20Domestic%20Violence.%20I%E2%80%99d%20like%20to%20know%20the%20next%20safe%20step%20to%20connect%20with%20your%20community.%0A%0AName%20(optional)%3A%0APreferred%20way%20to%20connect%3A%0A%0AThank%20you.">
-          <div><strong>Email (Recommended)</strong><span>Opens a gentle pre-written note you can edit.</span></div><span aria-hidden="true">→</span>
+      <div class="dialogBody">
+        <a class="pill" id="emailPill"
+           href="mailto:support@admiringangels.com?subject=I%20Need%20A%20Safe%20Next%20Step&body=Hi%20Admiring%20Angels%2C%0A%0AI%E2%80%99m%20rebuilding%20after%20divorce%20or%20domestic%20violence.%20I%E2%80%99d%20like%20to%20know%20the%20next%20safe%20step%20to%20connect%20with%20your%20community.%0A%0AName%20(optional)%3A%0APreferred%20way%20to%20connect%3A%0A%0AThank%20you.">
+          <div>
+            <strong>Email (Recommended)</strong>
+            <span>Opens a gentle pre-written note you can edit.</span>
+          </div>
+          <span aria-hidden="true">→</span>
         </a>
 
         <a class="pill" href="https://www.facebook.com/share/1FoD9rCvGL/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
-          <div><strong>Visit Facebook</strong><span>Opens in a new tab.</span></div><span aria-hidden="true">↗</span>
+          <div>
+            <strong>Visit Facebook</strong>
+            <span>Opens in a new tab.</span>
+          </div>
+          <span aria-hidden="true">↗</span>
         </a>
 
-        <div class="pill" style="cursor:default;">
-          <div><strong>Prefer Silence?</strong><span>Copy our email and reach out when you’re ready.</span></div>
-          <button class="btn soft" type="button" id="copyEmail2" data-email="support@admiringangels.com">Copy Email</button>
+        <div class="pill pillInline" aria-label="Copy email option">
+          <div>
+            <strong>Prefer Silence?</strong>
+            <span>Copy our email and reach out when you’re ready.</span>
+          </div>
+          <button class="btn btnSoft" type="button" id="copyEmail2" data-email="support@admiringangels.com">
+            Copy Email
+          </button>
         </div>
+
+        <p class="tiny muted">
+          If you are in immediate danger, call 911.
+        </p>
       </div>
     </div>
   </div>
 
-  <script src="assets/js/main.js"></script>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>
